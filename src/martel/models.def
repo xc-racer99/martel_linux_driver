@@ -1,0 +1,42 @@
+/******************************************************************************
+* COMPANY       : Martel Instruments Ltd
+* PROJECT       : LINUX DRIVER
+*******************************************************************************
+* NAME          : models.def
+* DESCRIPTION   : MARTEL library - definition of printers models
+* CVS           : $Id: models.def,v 1.1 2006/08/01 09:12:34 chris Exp $
+*******************************************************************************
+*   Copyright (C) 2006  Martel Instruments Ltd
+*
+*   This file is part of libmartel.
+*
+*   libmartel is free software; you can redistribute it and/or
+*   modify it under the terms of the GNU Lesser General Public
+*   License as published by the Free Software Foundation; either
+*   version 2.1 of the License, or (at your option) any later version.
+*
+*   libmartel is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*   Lesser General Public License for more details.
+*
+*   You should have received a copy of the GNU Lesser General Public
+*   License along with libmartel; if not, write to the Free Software
+*   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*******************************************************************************
+* HISTORY       :
+*   27-Jul-06   CML     Initial revision
+******************************************************************************/
+
+#define MODEL_UNKNOWN           0
+
+#define MODEL_MCP7810           0x1000
+#define MODEL_MCP8810           0x1001
+#define MODEL_MPP5510           0x1002
+#define MODEL_MPP5610           0x1003
+#define MODEL_MPP2000           0x1004
+#define MODEL_MPP3000           0x1005
+#define MODEL_MPP4000           0x1006
+
+#define MODEL_INVALID           -1
+

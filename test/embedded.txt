@@ -1,0 +1,3 @@
+Normal printing.<LF><LF><LF>
+Printed with <ESC>!<2>32 CPL font.
+<TAB><ESC>w<1>Double-height printing.

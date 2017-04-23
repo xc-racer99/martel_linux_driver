@@ -1,0 +1,220 @@
+//=============================================================================
+// COMPANY       : MARTEL Instruments Ltd.
+// PROJECT       : LINUX DRIVER
+//=============================================================================
+// NAME          : martel.drv
+// DESCRIPTION   : Definition of PPD files for MARTEL printers
+// CVS           : $Id: martel.drv,v 1.1 2006/08/01 09:11:04 chris Exp $
+//=============================================================================
+//   Copyright (C) 2006  MARTEL Instruments Ltd
+//   
+//   This file is part of the MARTEL Linux Driver.
+//
+//   MARTEL Linux Driver is free software; you can redistribute it and/or modify
+//   it under the terms of the GNU General Public License as published by
+//   the Free Software Foundation; either version 2 of the License, or
+//   (at your option) any later version.
+//
+//   MARTEL Linux Driver is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
+//
+//   You should have received a copy of the GNU General Public License
+//   along with MARTEL Linux Driver; if not, write to the Free Software
+//   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+//=============================================================================
+// HISTORY       :
+//   27-Jul-06   CML     Initial revision
+//=============================================================================
+
+#include <font.defs>
+#include <media.defs>
+
+// Common definitions ---------------------------------------------------------
+
+#media "Roll58mm/Paper roll 58mm (2 inches)" 48mm 5cm
+//#media "Roll60mm/Paper roll 60mm (2 inches)" 54mm 5cm
+#media "Roll80mm/Paper roll 80mm (3 inches)" 72mm 5cm
+//#media "Roll82.5mm/Paper roll 82.5mm (3 inches)" 80mm 5cm
+#media "Roll112mm/Paper roll 114mm (4 inches)" 104mm 5cm
+//#media "Roll114mm/Paper roll 114mm (4 inches)" 108mm 5cm
+
+#include <martel/models.def>
+#include <martel/version.def>
+
+Font *
+
+Manufacturer "MARTEL"
+Version $MARTEL_MAJOR.$MARTEL_MINOR.$MARTEL_BUGFIX
+
+*Resolution k 1 0 0 0 "203dpi/203 DPI"
+
+Filter application/vnd.cups-raster 100 rastertomartel
+Filter text/plain 100 texttomartel
+
+// Common options -------------------------------------------------------------
+
+// Options
+//  prbaudrate          Serial baudrate during printing
+//  prhandshake         Serial handshaking during printing
+//  prtimeout           Printing timeout
+//  dynadiv             Number of black bytes for dynamic division
+//  maxspeed            Maximum printing speed
+//  intensity           Printing intensity
+//  font                Internal font used in text mode printing
+//  process             Process embedded control codes if true
+//  fwdfeed             Forward feed distance after ticket
+//  backfeed            Backward feed distance after ticket
+
+Group "Port Settings"
+
+  Group "Serial Port settings"
+
+    Group "Printing settings"
+      Option "prbaudrate/Serial printing baudrate" PickOne AnySetup 10
+        *Choice "-1/Default" ""
+        Choice "0/1200 bauds" ""
+        Choice "1/2400 bauds" ""
+        Choice "2/4800 bauds" ""
+        Choice "3/9600 bauds" ""
+        Choice "4/19200 bauds" ""
+      Option "prhandshake/Serial printing handshaking" PickOne AnySetup 10
+        *Choice "-1/Default" ""
+        Choice "1/Software flow control (XON/XOFF)" ""
+        Choice "2/Hardware flow control (RTS/CTS)" ""
+
+  Group "Common settings"
+
+    Option "prtimeout/Printing timeout" PickOne AnySetup 10
+      Choice "0/None" ""
+      Choice "5000/5s" ""
+      Choice "10000/10s" ""
+      Choice "20000/20s" ""
+      *Choice "30000/30s" ""
+      Choice "40000/40s" ""
+      Choice "50000/50s" ""
+      Choice "60000/60s" ""
+
+Group "Printer settings"
+
+  Group "Hardware control"
+
+  Group "Text"
+    Option "font/Internal font" PickOne AnySetup 10
+      *Choice "-1/Default" ""
+      Choice "0/24CPL Font" ""
+      Choice "1/48CPL Font" ""
+      Choice "2/32CPL Font" ""
+
+    Option "process/Process embedded control codes" Boolean AnySetup 10
+      *Choice "False/No" ""
+      Choice "True/Yes" ""
+
+Group "Advanced Driver settings"
+  Option "fwdfeed/Forward feed after ticket" PickOne AnySetup 10
+    *Choice "0/0 dotlines (0.0mm)" ""
+    Choice "1/1 dotline (0.125mm)" ""
+    Choice "2/2 dotlines (0.25mm)" ""
+    Choice "3/3 dotlines (0.375mm)" ""
+    Choice "4/4 dotlines (0.5mm)" ""
+    Choice "5/5 dotlines (0.625mm)" ""
+    Choice "6/6 dotlines (0.75mm)" ""
+    Choice "7/7 dotlines (0.875mm)" ""
+    Choice "8/8 dotlines (1.0mm)" ""
+    Choice "9/9 dotlines (1.125mm)" ""
+    Choice "10/10 dotlines (1.25mm)" ""
+    Choice "11/11 dotlines (1.375mm)" ""
+    Choice "12/12 dotlines (1.5mm)" ""
+    Choice "13/13 dotlines (1.625mm)" ""
+    Choice "14/14 dotlines (1.75mm)" ""
+    Choice "15/15 dotlines (1.875mm)" ""
+    Choice "16/16 dotlines (2.0mm)" ""
+    Choice "17/17 dotlines (2.125mm)" ""
+    Choice "18/18 dotlines (2.25mm)" ""
+    Choice "19/19 dotlines (2.375mm)" ""
+    Choice "20/20 dotlines (2.5mm)" ""
+    Choice "21/21 dotlines (2.625mm)" ""
+    Choice "22/22 dotlines (2.75mm)" ""
+    Choice "23/23 dotlines (2.875mm)" ""
+  Option "backfeed/Backward feed after ticket" PickOne AnySetup 10
+    *Choice "0/0 dotlines (0.0mm)" ""
+    Choice "1/1 dotline (0.125mm)" ""
+    Choice "2/2 dotlines (0.25mm)" ""
+    Choice "3/3 dotlines (0.375mm)" ""
+    Choice "4/4 dotlines (0.5mm)" ""
+    Choice "5/5 dotlines (0.625mm)" ""
+    Choice "6/6 dotlines (0.75mm)" ""
+    Choice "7/7 dotlines (0.875mm)" ""
+    Choice "8/8 dotlines (1.0mm)" ""
+    Choice "9/9 dotlines (1.125mm)" ""
+    Choice "10/10 dotlines (1.25mm)" ""
+    Choice "11/11 dotlines (1.375mm)" ""
+    Choice "12/12 dotlines (1.5mm)" ""
+    Choice "13/13 dotlines (1.625mm)" ""
+    Choice "14/14 dotlines (1.75mm)" ""
+    Choice "15/15 dotlines (1.875mm)" ""
+    Choice "16/16 dotlines (2.0mm)" ""
+    Choice "17/17 dotlines (2.125mm)" ""
+    Choice "18/18 dotlines (2.25mm)" ""
+    Choice "19/19 dotlines (2.375mm)" ""
+    Choice "20/20 dotlines (2.5mm)" ""
+    Choice "21/21 dotlines (2.625mm)" ""
+    Choice "22/22 dotlines (2.75mm)" ""
+    Choice "23/23 dotlines (2.875mm)" ""
+
+// MCP7810/MCP8810/MPP5510/MPP5610 printers definition -------------------------
+
+{
+  ModelName "MCP7810"
+  ModelNumber $MODEL_MCP7810
+  PCFileName "mcp7810.ppd"
+  *MediaSize Roll58mm
+}
+
+{
+  ModelName "MCP8810"
+  ModelNumber $MODEL_MCP8810
+  PCFileName "mcp8810.ppd"
+  *MediaSize Roll58mm
+}
+
+{
+  ModelName "MPP5510"
+  ModelNumber $MODEL_MPP5510
+  PCFileName "mpp5510.ppd"
+  *MediaSize Roll58mm
+}
+
+{
+  ModelName "MPP5610"
+  ModelNumber $MODEL_MPP5610
+  PCFileName "mpp5610.ppd"
+  *MediaSize Roll58mm
+}
+
+{
+  ModelName "MPP2000"
+  ModelNumber $MODEL_MPP2000
+  PCFileName "mpp2000.ppd"
+  *MediaSize Roll58mm
+}
+
+{
+  ModelName "MPP3000"
+  ModelNumber $MODEL_MPP3000
+  PCFileName "mpp3000.ppd"
+  *MediaSize Roll80mm
+}
+
+{
+  ModelName "MPP4000"
+  ModelNumber $MODEL_MPP4000
+  PCFileName "mpp4000.ppd"
+  *MediaSize Roll112mm
+}
+
+// end of file ----------------------------------------------------------------
+
+
+
