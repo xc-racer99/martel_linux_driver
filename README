@@ -1,0 +1,26 @@
+This driver supports the MPP5510 series, MPP5610 series, MCP7810, MCP7830, MCP8810, and MCP8830 thermal printers made by Martel.
+
+I've reposted it here as the official download from the Martel site (http://www.martelinstruments.com/) requires logging in, plus the downloaded files are in a weird-semi corrupted tar.  It also needed a minor modification to the build flags to build properly (only tested on Ubuntu 16.04)
+
+The code is licensed under the GPL.
+
+To Build:
+
+Make sure you have (on Debian-based distrubtions) the following packages installed: build-essential libcups-dev libcupsimage2-dev
+
+cd src
+make
+sudo make install
+
+Adding the printer:
+
+For serial port:
+lpadmin -p {Printer Name} -E -v martel:{/dev/node}?type=serial+baudrate={1200|2400|4800|9600|19200}+handshake={none|rtscts|xonxoff}
+
+For parallel port:
+lpadmin -p {Printer Name} -E -v martel:{/dev/node}?type=parallel+poll={poll|irq}
+
+Make sure that you have permissions setup correctly for /dev/node and that the options are correct for what your printer is set to.
+
+
+Refer to the files in doc for complete instructions

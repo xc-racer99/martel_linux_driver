@@ -40,3 +40,8 @@ Release 0.1.0 (31-Jul-06)
 + initial revision
 
 -------------------------------------------------------------------------------
+Release 0.1.1 (24-Jul-17)
+-------------------------------------------------------------------------------
++ added README
++ fixed file permissions
++ fixed compilation on modern systems
