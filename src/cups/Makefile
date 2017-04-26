@@ -50,13 +50,13 @@ CSCOPE_FILES=cscope.out cscope.files
 all: $(TARGETS)
 
 rastertomartel: rastertomartel.c common.c $(marteldir)/libmartel.a
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -lmartel -o $@
+	$(CC) $(CFLAGS) $^ -lmartel $(LDFLAGS) -o $@
 
 texttomartel: texttomartel.c common.c $(marteldir)/libmartel.a
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -lmartel -o $@
+	$(CC) $(CFLAGS) $^ -lmartel $(LDFLAGS) -o $@
 
 martel: martel.c common.c $(marteldir)/libmartel.a
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -lmartel -o $@
+	$(CC) $(CFLAGS) $^ -lmartel $(LDFLAGS) -o $@
 
 clean:
 	$(RM) *.o $(TARGETS) $(CSCOPE_FILES)

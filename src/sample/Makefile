@@ -45,16 +45,16 @@ CSCOPE_FILES=cscope.out cscope.files
 all: $(TARGETS)
 
 sample1: sample1.c $(marteldir)/libmartel.a
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -lmartel -o $@
+	$(CC) $(CFLAGS) $^ -lmartel $(LDFLAGS) -o $@
 
 sample2: sample2.c $(marteldir)/libmartel.a
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -lmartel -o $@
+	$(CC) $(CFLAGS) $^ -lmartel $(LDFLAGS) -o $@
 
 sample3: sample3.c $(marteldir)/libmartel.a
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -lmartel -o $@
+	$(CC) $(CFLAGS) $^ -lmartel $(LDFLAGS) -o $@
 
 sample4: sample4.c $(marteldir)/libmartel.a
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -lmartel -o $@
+	$(CC) $(CFLAGS) $^ -lmartel $(LDFLAGS) -o $@
 
 clean:
 	$(RM) *.o $(TARGETS) $(CSCOPE_FILES)
