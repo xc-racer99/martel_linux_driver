@@ -63,6 +63,7 @@ clean:
 
 install:
 	$(INSTALL) -s martel $(backenddir)
+	$(INSTALL) meostomartel $(filterdir)
 	$(INSTALL) -s rastertomartel $(filterdir)
 	$(INSTALL) -s texttomartel $(filterdir)
 	

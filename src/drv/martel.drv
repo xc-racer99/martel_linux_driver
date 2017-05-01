@@ -33,7 +33,7 @@
 
 // Common definitions ---------------------------------------------------------
 
-#media "Roll58mm/Paper roll 58mm (2 inches)" 48mm 5cm
+#media "Roll58mm/Paper roll 58mm (2 inches)" 48mm 50cm
 //#media "Roll60mm/Paper roll 60mm (2 inches)" 54mm 5cm
 #media "Roll80mm/Paper roll 80mm (3 inches)" 72mm 5cm
 //#media "Roll82.5mm/Paper roll 82.5mm (3 inches)" 80mm 5cm
@@ -50,6 +50,7 @@ Version $MARTEL_MAJOR.$MARTEL_MINOR.$MARTEL_BUGFIX
 
 *Resolution k 1 0 0 0 "203dpi/203 DPI"
 
+Filter application/postscript 0 meostomartel
 Filter application/vnd.cups-raster 100 rastertomartel
 Filter text/plain 100 texttomartel
 
@@ -108,8 +109,8 @@ Group "Printer settings"
       Choice "2/32CPL Font" ""
 
     Option "process/Process embedded control codes" Boolean AnySetup 10
-      *Choice "False/No" ""
-      Choice "True/Yes" ""
+      Choice "False/No" ""
+      *Choice "True/Yes" ""
 
 Group "Advanced Driver settings"
   Option "fwdfeed/Forward feed after ticket" PickOne AnySetup 10

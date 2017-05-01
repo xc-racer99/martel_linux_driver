@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# See if we have a filename on the command-line...
+if [ -n "$6" ]; then
+  exec <"$6"
+fi
+
+# We read the data into a temporary file as ps2ascii needs a file
+tempfiles=
+trap 'rm -f $tempfiles' 0 1 2 13 15
+
+ifile=$(mktemp -t meospstoascii.XXXXXX)
+psfile=$(mktemp -t asciitomartel.XXXXXXX)
+FILE=$(mktemp -t asciitomartel.XXXXXX)
+tempfiles="$tempfiles $ifile $psfile $FILE"
+
+cat >"$ifile"
+
+# Run through ps2ps
+ps2ps "$ifile" "$psfile"
+
+# Convert ps to ASCII text
+ps2ascii "$psfile" > "$FILE"
+
+# Remove form feeds, aka page breaks
+sed -i -- 's/\f//g' "$FILE"
+
+# Insert a newline before the date
+sed -i -- 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/\n&/g' "$FILE"
+
+# Insert a newline before Check, start, and finish lines
+sed -i -- 's/Check\|Start\|Finish\|Time\|By/\n&/g' "$FILE"
+
+# Insert a newline before each 1. 2. 3. etc
+sed -i -- 's/\([0-9][0-9]\)\([0-9]*\.\)/\1\n\2/g' "$FILE"
+
+# Add a space where necessary in between time take on controls and total time
+sed -i -- 's/\([0-9]:[0-9][0-9]\)\([0-9]:[0-9][0-9]\)/\1 \2/g' "$FILE"
+
+# Align controls 1-10
+sed -i -- 's/\(^[0-9]\. \)\([0-9]\)/\1 \2/g' "$FILE"
+
+# Add a space after the card number, before the name
+sed -i -- 's/Card [0-9]*/& /g' "$FILE"
+
+# Add a space before any d:dd but not d:dd:dd
+sed -i -- 's/ [0-9]:[0-9][0-9]/ &/g' "$FILE"
+
+# Align the total time column to h:mm:ss
+sed -i -- 's/ [0-9]:[0-9][0-9]$/   &/g' "$FILE"
+sed -i -- 's/ [0-9][0-9]:[0-9][0-9]$/   &/g' "$FILE"
+
+# Align when the control number is less than 100
+sed -i -- 's/\([0-9]\. *\)\([0-9][0-9] \)/\1 \2/g' "$FILE"
+
+# Remove time of day from controls
+sed -i -- 's/\([0-9]\. *[0-9]* \)[0-9]*:[0-9][0-9]:[0-9][0-9]/\1 /g' "$FILE"
+
+# Remove time of day from finish
+sed -i -- 's/\(Finish \)[0-9]*:[0-9][0-9]:[0-9][0-9]/\1  /g' "$FILE"
+
+# Make the name bold
+sed -i -- 's/\(Card [0-9]*\)\(.*\)/\1<ESC>G\2<ESC>H/g' "$FILE"
+
+# Make the total time say total time in bold
+sed -i -- 's/Time.*/<ESC>GTotal &<ESC>H/g' "$FILE"
+
+# Add form-feeds to the end of the file
+printf "\f\f" >> "$FILE"
+
+# Forward everything on to the Martel texttomartel driver
+"$(dirname "$0")/texttomartel" "$1" "$2" "$3" "$4" "$5" "$FILE"
