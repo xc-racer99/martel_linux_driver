@@ -36,6 +36,7 @@
 
 #include <cups/cups.h>
 #include <cups/raster.h>
+#include <cups/ppd.h>
 
 #include <martel/martel.h>
 
