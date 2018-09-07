@@ -27,7 +27,10 @@ my %hashmap = (
     parenright => ")",
     slash => "/",
     plus => "+",
-    period => "."
+    period => ".",
+    uni00A0 => " ",
+    uni00AD => "-",
+    
 );
 
 # Temp output file
